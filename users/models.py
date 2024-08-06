@@ -22,7 +22,7 @@ class Client(models.Model):
                                      help_text='Введите дату рождения')
 
     def __str__(self):
-        return f'{self.first_name} {self.last_name}'
+        return f'{self.email}'
 
     class Meta:
         verbose_name = 'Клиент'

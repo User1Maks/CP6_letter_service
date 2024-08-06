@@ -2,3 +2,12 @@ Django
 
 # Библиотека для подключения к БД
 psycopg2-binary
+# Для редактирования кода под PIP8
+black
+# Планировщик задач от Django для работы на OC Windows
+# https://pypi.org/project/django-apscheduler/
+django-apscheduler
+
+python-dotenv
+# Библиотека для работы с изображениями
+pillow
