@@ -1,12 +1,16 @@
 from pathlib import Path
+import os
+from dotenv import load_dotenv
 
 # Текущая директория проекта
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-nofv^sk$*1n#&8p)7z2(q8s9rhv!3&d323)ga_#80cu8_^2b+z'
+load_dotenv(BASE_DIR / '.env')
+
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # Режим разработки Вкл\Выкл
-DEBUG = True
+DEBUG = os.getenv('DEBUG', False) == 'True'
 # Для записи api адресов и доменов для доступа в приложение
 # * - доступ разрешен всем
 ALLOWED_HOSTS = ['*']
@@ -18,6 +22,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -52,8 +58,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.getenv('DATABASES_NAME'),
+        'USER': os.getenv('DATABASES_USER'),
+        'PASSWORD': os.getenv('DATABASES_PASSWORD'),
+        'HOST': os.getenv('DATABASES_HOST'),
+        'PORT': os.getenv('DATABASES_PORT'),
     }
 }
 
@@ -83,6 +93,5 @@ USE_TZ = True
 STATIC_URL = 'static/'
 # Путь до статической директории
 STATICFILES_DIRS = (BASE_DIR / 'static',)
-
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
