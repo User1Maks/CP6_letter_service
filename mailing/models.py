@@ -1,5 +1,5 @@
 from django.db import models
-from users.models import NULLABLE, User
+from users.models import NULLABLE, User, Client
 
 
 class MailingMessage(models.Model):
@@ -34,8 +34,13 @@ class MailingSettings(models.Model):
         help_text='Укажите название рассылки')
 
     datetime_first_mailing = models.DateTimeField(
-        verbose_name='Дата и время отправки рассылки',
-        help_text='Введите дату и время отправки рассылки')
+        verbose_name='Дата и время отправки рассылки')
+
+    next_datetime_first_mailing = models.DateTimeField(
+        verbose_name='Дата и время следующей отправки рассылки')
+
+    last_datetime_first_mailing = models.DateTimeField(
+        verbose_name='Дата и время последней отправки рассылки')
 
     period_mailing_choices = (
         (1, 'Каждую минуту'),
@@ -77,7 +82,46 @@ class MailingSettings(models.Model):
         help_text='Выберите отправителя'
     )
 
+    def __str__(self):
+        return f'{self.mailing_name}'
+
+    class Meta:
+        verbose_name = 'Рассылка'
+        verbose_name_plural = 'Рассылки'
+
 
 class MailingAttempt(models.Model):
     """Класс попытки отправки письма"""
-    pass
+    datetime_attempt = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Дата и время попытки отправки',
+        editable=False
+    )
+    attempt_status = models.BooleanField(
+        verbose_name='Статус попытки',
+        editable=False
+    )
+    service_response = models.TextField(
+        verbose_name='Ответ сервиса',
+        null=True,
+        editable=False
+    )
+    mailing = models.ForeignKey(
+        MailingSettings,
+        on_delete=models.CASCADE,
+        verbose_name='Рассылка')
+
+    client = models.ForeignKey(
+        Client,
+        on_delete=models.CASCADE,
+        verbose_name='Клиент'
+    )
+
+    def __str__(self):
+        return (f'Попытка рассылки {self.pk} - {self.mailing} '
+                f'от {self.datetime_attempt} для клиента {self.client} '
+                f'{self.attempt_status}')
+
+    class Meta:
+        verbose_name = 'Попытка отправки письма'
+        verbose_name_plural = 'Попытки отправки письма'

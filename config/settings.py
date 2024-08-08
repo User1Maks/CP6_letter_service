@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'users',
     'mailing',
     'django_apscheduler',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [

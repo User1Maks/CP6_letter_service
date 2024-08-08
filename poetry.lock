@@ -147,6 +147,25 @@ apscheduler = ">=3.2,<4.0"
 django = ">=3.2"
 
 [[package]]
+name = "django-phonenumber-field"
+version = "8.0.0"
+description = "An international phone number field for django models."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django_phonenumber_field-8.0.0-py3-none-any.whl", hash = "sha256:196c917b70c01a98e327f482eb8a4a4a55a29891db551f99078585397370b3ba"},
+    {file = "django_phonenumber_field-8.0.0.tar.gz", hash = "sha256:8a560fe1b01b94c9de8cde22bc373b695f023cc6df4baba00264cb079da9f631"},
+]
+
+[package.dependencies]
+Django = ">=3.2"
+phonenumberslite = {version = ">=7.0.2", optional = true, markers = "extra == \"phonenumberslite\""}
+
+[package.extras]
+phonenumbers = ["phonenumbers (>=7.0.2)"]
+phonenumberslite = ["phonenumberslite (>=7.0.2)"]
+
+[[package]]
 name = "mypy-extensions"
 version = "1.0.0"
 description = "Type system extensions for programs checked with the mypy type checker."
@@ -177,6 +196,17 @@ python-versions = ">=3.8"
 files = [
     {file = "pathspec-0.12.1-py3-none-any.whl", hash = "sha256:a0d503e138a4c123b27490a4f7beda6a01c6f288df0e4a8b79c7eb0dc7b4cc08"},
     {file = "pathspec-0.12.1.tar.gz", hash = "sha256:a482d51503a1ab33b1c67a6c3813a26953dbdc71c31dacaef9a838c4e29f5712"},
+]
+
+[[package]]
+name = "phonenumberslite"
+version = "8.13.42"
+description = "Python version of Google's common library for parsing, formatting, storing and validating international phone numbers."
+optional = false
+python-versions = "*"
+files = [
+    {file = "phonenumberslite-8.13.42-py2.py3-none-any.whl", hash = "sha256:9014fd8b72f46d3de91f7b1f8bbe5908b7f7373ce3b2a7e8e6d4e18d47f581e6"},
+    {file = "phonenumberslite-8.13.42.tar.gz", hash = "sha256:b71184da0b7258b338094e04c90579d41f97befbd2c8bda0f0a320bd103fbc18"},
 ]
 
 [[package]]
@@ -455,4 +485,4 @@ devenv = ["check-manifest", "pytest (>=4.3)", "pytest-cov", "pytest-mock (>=3.3)
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "d4e5e699bc7de909d2a974c5d5f05bb68e75c63e4ff82ba042c6086e2d5cc0c7"
+content-hash = "a6fbe171391f4ae665673e4af6e78df03972f76c62c5a6281ba65bed881e240a"
